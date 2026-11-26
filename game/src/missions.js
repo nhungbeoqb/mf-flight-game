@@ -45,7 +45,14 @@ export function updateMission(state, plane, world, dt, sounds) {
     if (d < CONFIG.ringRadius && altOk) {
       ring.done = true; state.ringsDone += 1; state.ringIndex += 1;
       sounds.ringChime();
-      say(state, state.ringIndex >= state.ringsLeft.length ? 'All rings flown — head for the landing!' : `Ring ${state.ringsDone} of ${state.ringsLeft.length} — nice flying.`, 3);
+      const lastRing = state.ringIndex >= state.ringsLeft.length;
+      const next = lastRing
+        ? (m.target.type === 'rescue' && !state.rescued ? 'All rings flown — land on the water by Seal Tooth to pick up Keeper Odo.'
+          : m.target.type === 'rescue' ? 'All rings flown — fly Keeper Odo home to Gull Rock!'
+          : m.target.type === 'drop' ? 'All rings flown — drop the parcel low and slow over Heron Cay.'
+          : 'All rings flown — head for the landing!')
+        : `Ring ${state.ringsDone} of ${state.ringsLeft.length} — nice flying.`;
+      say(state, next, 3);
     }
   }
   // Parcels: fly low over them to scoop them up.

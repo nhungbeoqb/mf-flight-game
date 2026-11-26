@@ -10,15 +10,15 @@ export const CONFIG = {
   minSpeed: 55,
   stallSpeed: 62,
   fuelCapacity: 100,
-  fuelBurnBase: 0.55,
-  fuelBurnThrottle: 1.35,
-  turnRateMax: 1.9,
+  fuelBurnBase: 0.08,
+  fuelBurnThrottle: 0.16,
+  turnRateMax: 2.6,
   climbRateMax: 95,
   damageCrash: 100,
   damageHardLanding: 34,
   damageScrape: 18,
   livesPerMission: 3,
-  ringRadius: 74,
+  ringRadius: 90,
   parcelRadius: 30,
   runwayHalfWidth: 46,
 };
@@ -86,4 +86,4 @@ export const MISSIONS = [
 
 export const PILOT = { name: 'Wren Halloway', plane: 'Kittiwake', callsign: 'Tide Post Seven' };
 export const DAWN = { skyTop: '#7ec8ee', skyMid: '#bfe6f7', skyLow: '#ffe9b8', sea: '#2e7fa8', seaDeep: '#1d5c80', sun: '#ffd66e' };
-export const NIGHT = { skyTop: '#0b1530', skyMid: '#16264d', skyLow: '#2c3a5e', sea: '#12283e', seaDeep: '#0a1a2c', sun: '#f4ead2' };
+export const NIGHT = { skyTop: '#0d1834', skyMid: '#1d3054', skyLow: '#3a4a6e', sea: '#1b3a56', seaDeep: '#10273c', sun: '#f4ead2' };

@@ -291,7 +291,7 @@ function drawHud(ctx, game, W, H) {
   }
 }
 
-export function drawGame(ctx, game, W, H) {
+export function drawGame(ctx, game, W, H, showHud = true) {
   const { plane, missionState, world } = game;
   const night = missionState.mission.night;
   const pal = paletteFor(night);
@@ -352,7 +352,7 @@ export function drawGame(ctx, game, W, H) {
     ctx.fillStyle = `rgba(190,220,240,${Math.min(0.25, (plane.alt - 500) / 1600)})`;
     ctx.fillRect(0, 0, W, H);
   }
-  drawHud(ctx, game, W, H);
+  if (showHud) drawHud(ctx, game, W, H);
 }
 
 function panel(ctx, W, H) {
@@ -361,23 +361,23 @@ function panel(ctx, W, H) {
 }
 
 export function drawTitle(ctx, game, W, H) {
-  drawGame(ctx, game, W, H);
+  drawGame(ctx, game, W, H, false);
   panel(ctx, W, H);
   ctx.textAlign = 'center';
   ctx.fillStyle = '#ffcf3d'; ctx.font = 'bold 64px system-ui, sans-serif';
-  ctx.fillText('TIDE POST', W / 2, H * 0.3);
+  ctx.fillText('TIDE POST', W / 2, H * 0.22);
   ctx.fillStyle = '#fff'; ctx.font = '28px system-ui, sans-serif';
-  ctx.fillText('A dawn mail run by seaplane', W / 2, H * 0.3 + 44);
+  ctx.fillText('A dawn mail run by seaplane', W / 2, H * 0.22 + 44);
   ctx.font = '17px system-ui, sans-serif'; ctx.fillStyle = '#d8ecf7';
-  ctx.fillText('Pilot Wren Halloway flies the Kittiwake between the lighthouses of the Gull Sound —', W / 2, H * 0.3 + 84);
-  ctx.fillText('through storm rings, over the tide, before the mail is late.', W / 2, H * 0.3 + 108);
+  ctx.fillText('Pilot Wren Halloway flies the Kittiwake between the lighthouses of the Gull Sound —', W / 2, H * 0.22 + 84);
+  ctx.fillText('through storm rings, over the tide, before the mail is late.', W / 2, H * 0.22 + 108);
   ctx.fillStyle = '#ffcf3d'; ctx.font = 'bold 22px system-ui, sans-serif';
-  ctx.fillText('CLICK TO FLY  ·  or press ENTER', W / 2, H * 0.62);
+  ctx.fillText('CLICK TO FLY  ·  or press ENTER', W / 2, H * 0.74);
   ctx.fillStyle = '#fff'; ctx.font = '16px system-ui, sans-serif';
-  ctx.fillText('W/S throttle · I/K climb & descend · A/D or ←/→ bank & turn · M mute · P pause', W / 2, H * 0.62 + 34);
-  ctx.fillText('Land slow, level and lined up. Bank gently when the cargo is fragile.', W / 2, H * 0.62 + 60);
+  ctx.fillText('W/S throttle · I/K climb & descend · A/D or ←/→ bank & turn · M mute · P pause', W / 2, H * 0.74 + 34);
+  ctx.fillText('Land slow, level and lined up. Bank gently when the cargo is fragile.', W / 2, H * 0.74 + 60);
   ctx.fillStyle = '#9fd8ef'; ctx.font = '15px system-ui, sans-serif';
-  ctx.fillText(`${game.save.missionsFlown} sorties flown · ${game.save.parcels} parcels delivered · best: ${bestLine(game.save)}`, W / 2, H * 0.62 + 96);
+  ctx.fillText(`${game.save.missionsFlown} sorties flown · ${game.save.parcels} parcels delivered · best: ${bestLine(game.save)}`, W / 2, H * 0.74 + 96);
 }
 
 function bestLine(save) {
@@ -386,7 +386,7 @@ function bestLine(save) {
 }
 
 export function drawSelect(ctx, game, W, H, buttons) {
-  drawGame(ctx, game, W, H);
+  drawGame(ctx, game, W, H, false);
   panel(ctx, W, H);
   ctx.textAlign = 'center';
   ctx.fillStyle = '#fff'; ctx.font = 'bold 40px system-ui, sans-serif';
@@ -415,7 +415,7 @@ export function drawSelect(ctx, game, W, H, buttons) {
 }
 
 export function drawEnd(ctx, game, W, H, buttons) {
-  drawGame(ctx, game, W, H);
+  drawGame(ctx, game, W, H, false);
   panel(ctx, W, H);
   const ms = game.missionState;
   const won = ms.phase === 'done';

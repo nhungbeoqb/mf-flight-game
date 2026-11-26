@@ -30,11 +30,11 @@ export function stageShot(game, shot) {
     missionState.ringsLeft[0].done = true; missionState.ringsDone = 1;
     missionState.parcelsLeft[0].taken = true; missionState.parcelsGot = 1;
   } else if (shot === 'night') {
-    // Night mail: the lit runway at Widow's Light ahead, last ring behind.
-    put(7300, 2150, 260, -0.55, 180, 60);
-    missionState.ringIndex = 3;
-    missionState.ringsLeft.forEach((r, i) => { if (i < 3) { r.done = true; } });
-    missionState.ringsDone = 3;
+    // Night mail: all rings flown, the lit runway at Widow's Light ahead.
+    put(7500, 1950, 220, -0.46, 170, 62);
+    missionState.ringIndex = 4;
+    missionState.ringsLeft.forEach((r) => { r.done = true; });
+    missionState.ringsDone = 4;
     plane.bank = 6;
   } else if (shot === 'rescue') {
     // The rescue: low over the water by Seal Tooth, Keeper Odo's island in frame.

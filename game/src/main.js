@@ -63,7 +63,7 @@ function backdropMission() {
   game.plane = createPlane(islandById('gull'));
   game.plane.fuel = 88;
   game.missionState = createMissionState(MISSIONS[0], game.plane);
-  game.plane.x = 1500; game.plane.y = 2300; game.plane.alt = 330;
+  game.plane.x = 1250; game.plane.y = 2450; game.plane.alt = 330;
   game.plane.heading = -0.9; game.plane.speed = 210; game.plane.throttle = 72; game.plane.bank = -8;
 }
 backdropMission();
@@ -92,7 +92,10 @@ function autopilotInput() {
   while (err > Math.PI) err -= Math.PI * 2;
   while (err < -Math.PI) err += Math.PI * 2;
   const keys = new Set();
-  if (plane.speed < 205) keys.add('w');
+  const distToTarget = Math.hypot(target.x - plane.x, target.y - plane.y);
+  const approachSpeed = distToTarget < 600 ? 120 : 190;
+  if (plane.speed < approachSpeed - 10) keys.add('w');
+  if (plane.speed > approachSpeed + 10) keys.add('s');
   if (plane.alt < target.alt - 25) keys.add('i');
   if (plane.alt > target.alt + 25) keys.add('k');
   if (err > 0.08) keys.add('d');
@@ -199,4 +202,5 @@ function draw(W, H) {
 }
 
 setStatus('TIDE POST — a dawn mail run by seaplane. Click to fly.');
+window.__tidePost = game;
 requestAnimationFrame(frame);
